@@ -22,11 +22,15 @@ class C_admin extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('M_admin');
+		if(!$this->session->has_userdata('username'))
+		{
+			redirect(site_url('C_auth'));
+		}	
 	}
 
 	public function index()
 	{
-		$this->load->view('welcome_message');
+		echo 'admin/index.html';
 	}
 
 	public function add()

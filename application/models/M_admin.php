@@ -13,4 +13,10 @@ class M_admin extends CI_Model {
 	{
 		return $this->db->insert('admin',$data);
 	}
+
+	public function login($username,$password)
+	{
+		$query=$this->db->get_where('admin',array('username'=>$username,'password'=>sha1($password)));	
+		return $query->result();
+	}
 }
