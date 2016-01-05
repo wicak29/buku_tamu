@@ -27,12 +27,12 @@ class C_auth extends CI_Controller {
 
 	public function index()
 	{
-		
+		$data['page_title'] = "Login";
 		if($this->session->has_userdata('username'))
 		{
 			redirect(site_url('C_admin'));
 		}
-		$this->load->view('admin/login.html');
+		$this->load->view('admin/V_login', $data);
 	}
 
 	public function login()
