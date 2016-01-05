@@ -61,6 +61,8 @@ class C_auth extends CI_Controller {
 				redirect(site_url('C_admin/'));
 				//echo $this->session->has_userdata('username');
 			}	
+			else redirect(site_url('C_auth'));
+
 		}
 		else redirect(site_url('C_auth'));
 
@@ -69,5 +71,7 @@ class C_auth extends CI_Controller {
 	public function logout()
 	{
 		$this->session->sess_destroy();
+		redirect(site_url('C_auth'));
+
 	}
 }
