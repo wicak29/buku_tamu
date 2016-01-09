@@ -1,11 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class C_Pengunjungterdaftar extends CI_Controller {
+class C_pengunjungterdaftar extends CI_Controller {
 	public function __construct()
 	{
 		parent:: __construct();
-		$this->load->model('M_Pengunjungterdaftar');
+		$this->load->model('M_pengunjungterdaftar');
+		if(!$this->session->has_userdata('username'))
+		{
+			redirect(site_url('C_auth'));
+		}
 	}
 	public function index()
 	{
