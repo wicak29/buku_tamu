@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class C_pengunjungterdaftar extends CI_Controller {
 	public function __construct()
 	{
-		parent:: __construct();
+		parent::__construct();
 		$this->load->model('M_pengunjungterdaftar');
 		if(!$this->session->has_userdata('username'))
 		{
@@ -51,9 +51,9 @@ class C_pengunjungterdaftar extends CI_Controller {
 			'pengunjung_terdaftar_instansi_idinstansi' => $res[0]->instansi_idinstansi,
 			'lab_idlab' => $this->session->has_userdata('lab_idlab'),
 			'jam_datang' => date("Y-m-d H:i:s"),
-			'jam_keluar' => '';
-			'keperluan' => $keperluan;
-			)
+			'jam_keluar' => '',
+			'keperluan' => $keperluan
+			);		
 		$this->M_pengunjungterdaftar->add_PT_lab($data_PT_lab);
 		redirect(site_url('C_pengunjungterdaftar'));
 	}
