@@ -21,6 +21,7 @@ class C_admin extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$data['page_title'] = "Home Admin";
 		$this->load->model('M_admin');
 		if(!$this->session->has_userdata('username'))
 		{
@@ -30,7 +31,7 @@ class C_admin extends CI_Controller {
 
 	public function index()
 	{
-		echo 'admin/index';
+		$this->load->view('admin/V_home');
 	}
 
 	public function add()

@@ -18,3 +18,10 @@ body > .grid
     margin-top: 25vh;
     max-width: 450px;
 }
+
+.column-home
+{
+    margin-top: 40px;
+    max-width: 600px;
+    width: 450px;
+}
