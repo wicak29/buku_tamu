@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class C_su_admin extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -22,12 +22,21 @@ class Welcome extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('M_su_admin');
+		$this->load->model('M_admin');
+		if (!$this->session->has_userdata('username'))
+		{
+			redirect(site_url('C_auth'));
+		}
 	}
-
 
 	public function index()
 	{
 		$this->load->view('su_admin/index');
 	}
+
+	public function add_lab()
+	{
+		$this->C_lab->add();
+	}
+	
 }
