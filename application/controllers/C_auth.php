@@ -58,14 +58,14 @@ class C_auth extends CI_Controller {
 					);
 
 				$this->session->set_userdata($session_data);
-				redirect(site_url('C_admin/'));
+				if('username'=='SuperAdmin')
+					redirect(site_url('C_su_admin/'));
+				else redirect(site_url('C_admin/'));
 				//echo $this->session->has_userdata('username');
 			}	
 			else redirect(site_url('C_auth'));
-
 		}
 		else redirect(site_url('C_auth'));
-
 	}
 
 	public function logout()
