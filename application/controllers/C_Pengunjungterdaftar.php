@@ -17,18 +17,45 @@ class C_pengunjungterdaftar extends CI_Controller {
 	}
 	public function add()
 	{
-		$data = array(
-			'nama_pengunjung' => $this->input->post('nama_pengunjung'),
-			'nrp_pengunjung' => $this->input->post('nrp_pengunjung'),
-			'telp_pengunjung' => $this->input->post('telp_pengunjung'),
-			'tahun_lahir' => $this->input->post('tahun_lahir'),
-			'kota_asal' => $this->input->post('kota_asal'),
-			'instansi_idinstansi' => $this->input->post('instansi_idinstansi'),
+		$nama=$this->input->post('v_nama');
+		$nrp=$this->input->post('v_nrp');
+		$telp=$this->input->post('v_telp');
+		$tahun=$this->input->post('v_tahun');
+		$kota=$this->input->post('v_kota');
+		$instansi=$this->input->post('v_instansi');
+		$keperluan=$this->input->post('v_keperluan');
+
+		//checking whether the user already in our database or not
+		//$res=$this->M_pengunjungterdaftar->check('5113100109');
+		$res=$this->M_pengunjungterdaftar->check($nrp);
+		
+		//print_r($res[0]->idpengunjung);
+		$data_PT = array(
+			'nama_pengunjung' => $nama,
+			'nrp_pengunjung' => $nrp,
+			'telp_pengunjung' => $telp,
+			'tahun_lahir' => $tahun,
+			'kota_asal' => $kota,
+			'instansi_idinstansi' => $instansi,
 			'delete_at' => 'NULL',
 			'update_at' => date('Y-m-d')
 			 );
+		if(sizeof($res)<1)
+		{
+			$this->M_pengunjungterdaftar->add_PT($data_PT);
+			$res=$this->M_pengunjungterdaftar->check($nrp);
+		}
 
-		echo $this->M_Pengunjungterdaftar->add($data);
+		$data_PT_lab = array(
+			'pengunjung_terdaftar_idpengunjung' => $res[0]->idpengunjung,
+			'pengunjung_terdaftar_instansi_idinstansi' => $res[0]->instansi_idinstansi,
+			'lab_idlab' => $this->session->has_userdata('lab_idlab'),
+			'jam_datang' => date("Y-m-d H:i:s"),
+			'jam_keluar' => '';
+			'keperluan' => $keperluan;
+			)
+		$this->M_pengunjungterdaftar->add_PT_lab($data_PT_lab);
+		redirect(site_url('C_pengunjungterdaftar'));
 	}
 }
 
