@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class C_admin extends CI_Controller {
+class Welcome extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -18,31 +18,16 @@ class C_admin extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('M_admin');
-		if(!$this->session->has_userdata('username'))
-		{
-			redirect(site_url('C_auth'));
-		}	
+		$this->load->model('M_su_admin');
 	}
+
 
 	public function index()
 	{
-		echo 'admin/index';
-	}
-
-	public function add()
-	{
-		$data = array(
-				'nama_admin' => $this->input->post('nama_admin'),
-				'username' => $this->input->post('username'),
-				'password' => sha1($this->input->post('password')),
-				'lab_idlab' => $this->input->post('id_lab'),
-				'update_at' => date('Y-m-d'),
-				'delete_at' => 'null'
-			);
-		echo $this->M_admin->add($data);
+		$this->load->view('su_admin/index');
 	}
 }
