@@ -24,7 +24,7 @@
   	<body>
   		<div class="ui middle aligned center aligned grid">
   			<div class="column-home">
-  				<h2 class="ui inverted image header">
+  				<h2 class="ui inverted header">
   					<div class="content">SELAMAT DATANG DI LAB. </div>
   				</h2>
   				<form name="form-login-admin" action="<?php echo site_url('C_auth/login');?>" method='POST' class="ui large form">
@@ -37,14 +37,45 @@
 								<option value="0">Non ITS</option>
 							</select>
 						</div>
-						<div id="password" class="field">
-							<label>Password</label>
-							<div class="ui left icon input">
-								<input type="password" name="password" placeholder="Password">
-								<i class="lock icon"></i>
+						<!-- NON ITS -->
+						<div id="nonits" class="field">
+							<label>Nama Instansi</label>
+							<div>
+								<input type="text" name="instansi" placeholder="ex : Universitas Indonesia">
 							</div>
 						</div>
-						<button class="ui fluid large blue submit button" type="submit" name="btn_login" value="login">Login</button>
+						<!--END NON ITS-->
+						<div id="nrp" class="field">
+							<label>NRP</label>
+							<div class="ui input">
+								<input type="number" name="nrp" placeholder="ex : 5113100999">
+							</div>
+						</div>
+						<div id="name" class="field">
+							<label>Nama Lengkap</label>
+							<div class="ui input">
+								<input type="text" name="name" placeholder="ex : Lionel Messi">
+							</div>
+						</div>
+						<div id="ttl" class="field">
+							<label>Tahun Lahir</label>
+							<div class="ui input">
+								<input type="text" name="tahun lahir" placeholder="ex : 1995">
+							</div>
+						</div>
+						<div id="kota" class="field">
+							<label>Kota Asal</label>
+							<div class="ui input">
+								<input type="text" name="kota" placeholder="ex : Surabaya">
+							</div>
+						</div>
+						<div id="name" class="field">
+							<label>Nomor HP</label>
+							<div class="ui input">
+								<input type="text" name="Nomor HP" placeholder="ex : 081234567890">
+							</div>
+						</div>
+						<button class="ui fluid large blue submit button" type="submit" name="btn_login" value="login">Masuk Lab</button>
   					</div>
 				</form>
   			</div>
@@ -53,16 +84,19 @@
   	<footer>
   	</footer>
   	<script>
-  		$("#password").hide();	
+  		$("#nrp").hide();	
+  		$("#nonits").hide();
   		$("#instansi").change(function () 
   		{
 	        if ($("#instansi").val() == "1") 
 	        {
-	        	$("#password").show();
+	        	$("#nrp").show();
+	        	$("#nonits").hide();
 	        }
 	        else if ($("#instansi").val() == "0") 
 	        {
-	        	$("#password").hide();	
+	        	$("#nrp").hide();	
+	        	$("#nonits").show();	
 	        }
 	    });
   	</script>
