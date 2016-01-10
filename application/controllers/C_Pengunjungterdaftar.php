@@ -15,6 +15,7 @@ class C_pengunjungterdaftar extends CI_Controller {
 	{
 		
 	}
+
 	public function add()
 	{
 		$nama=$this->input->post('v_nama');
@@ -24,6 +25,16 @@ class C_pengunjungterdaftar extends CI_Controller {
 		$kota=$this->input->post('v_kota');
 		$instansi=$this->input->post('v_instansi');
 		$keperluan=$this->input->post('v_keperluan');
+
+		if (!$nrp)
+		{
+			$nrp=0;
+		}
+
+		if (!$instansi)
+		{
+			$instansi=1;
+		}
 
 		//checking whether the user already in our database or not
 		//$res=$this->M_pengunjungterdaftar->check('5113100109');
@@ -40,6 +51,7 @@ class C_pengunjungterdaftar extends CI_Controller {
 			'delete_at' => 'NULL',
 			'update_at' => date('Y-m-d')
 			 );
+
 		if(sizeof($res)<1)
 		{
 			$this->M_pengunjungterdaftar->add_PT($data_PT);
