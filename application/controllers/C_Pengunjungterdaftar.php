@@ -6,6 +6,7 @@ class C_pengunjungterdaftar extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('M_pengunjungterdaftar');
+		$this->load->model('M_instansi');
 		if(!$this->session->has_userdata('username'))
 		{
 			redirect(site_url('C_auth'));
@@ -23,24 +24,23 @@ class C_pengunjungterdaftar extends CI_Controller {
 		$tahun=$this->input->post('v_tahun');
 		$kota=$this->input->post('v_kota');
 		$instansi=$this->input->post('v_instansi');
+		$nama_instansi=$this->input->post('v_nama_instansi');
 		$keperluan=$this->input->post('v_keperluan');
 
 		//checking whether the user already in our database or not
 		$res=$this->M_pengunjungterdaftar->check($nrp);		
 		//getting the intansi ID by input name
-		$get_instansi=$this->M_pengunjungterdaftar->get_instansi_byname($instansi);
 		
 		$data_instansi = array(
-			'nama_instansi' => $instansi,
+			'nama_instansi' => $nama_instansi,
 			'delete_at' => 'NULL',
 			'update_at' => date('Y-m-d')
 			);
-		if(sizeof($get_instansi)<1)
+		//ini masih masalah
+		if($nama_instansi=='NON ITS')
 		{
 			$this->M_pengunjungterdaftar->add_instansi($data_instansi);
-			$get_instansi=$this->M_pengunjungterdaftar->get_instansi_byname($instansi);
 		}
-
 		$data_PT = array(
 			'nama_pengunjung' => $nama,
 			'nrp_pengunjung' => $nrp,
