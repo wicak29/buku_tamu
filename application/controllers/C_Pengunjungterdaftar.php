@@ -26,17 +26,28 @@ class C_pengunjungterdaftar extends CI_Controller {
 		$keperluan=$this->input->post('v_keperluan');
 
 		//checking whether the user already in our database or not
-		//$res=$this->M_pengunjungterdaftar->check('5113100109');
-		$res=$this->M_pengunjungterdaftar->check($nrp);
+		$res=$this->M_pengunjungterdaftar->check($nrp);		
+		//getting the intansi ID by input name
+		$get_instansi=$this->M_pengunjungterdaftar->get_instansi_byname($instansi);
 		
-		//print_r($res[0]->idpengunjung);
+		$data_instansi = array(
+			'nama_instansi' => $instansi,
+			'delete_at' => 'NULL',
+			'update_at' => date('Y-m-d')
+			);
+		if(sizeof($get_instansi)<1)
+		{
+			$this->M_pengunjungterdaftar->add_instansi($data_instansi);
+			$get_instansi=$this->M_pengunjungterdaftar->get_instansi_byname($instansi);
+		}
+
 		$data_PT = array(
 			'nama_pengunjung' => $nama,
 			'nrp_pengunjung' => $nrp,
 			'telp_pengunjung' => $telp,
 			'tahun_lahir' => $tahun,
 			'kota_asal' => $kota,
-			'instansi_idinstansi' => $instansi,
+			'instansi_idinstansi' => $get_instansi[0]->idinstansi,
 			'delete_at' => 'NULL',
 			'update_at' => date('Y-m-d')
 			 );
