@@ -14,7 +14,7 @@ class C_pengunjungterdaftar extends CI_Controller {
 	}
 	public function index()
 	{
-		
+		// $this->get_instansi();
 	}
 
 	public function add()
@@ -80,5 +80,6 @@ class C_pengunjungterdaftar extends CI_Controller {
 		$this->M_pengunjungterdaftar->add_PT_lab($data_PT_lab);
 		redirect(site_url('C_pengunjungterdaftar'));
 	}
+
 }
 

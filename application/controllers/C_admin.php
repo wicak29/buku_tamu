@@ -23,6 +23,7 @@ class C_admin extends CI_Controller {
 		parent::__construct();
 		$data['page_title'] = "Home Admin";
 		$this->load->model('M_admin');
+		$this->load->model('M_instansi');
 		if(!$this->session->has_userdata('username'))
 		{
 			redirect(site_url('C_auth'));
@@ -31,7 +32,8 @@ class C_admin extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('admin/V_home');
+		$data['instansi'] = $this->M_instansi->get_instansi();
+		$this->load->view('admin/V_home', $data);
 	}
 
 	public function add()

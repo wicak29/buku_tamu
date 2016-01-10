@@ -12,4 +12,11 @@ class M_instansi extends CI_Model {
 	// 	$query=$this->db->get_where('instansi',array('nama_instansi'=>$instansi));
 	// 	return $query->result();
 	// } 
+
+	function get_instansi()
+	{
+		$query = $this->db->query('SELECT * FROM instansi');
+
+		return $query->result();
+	}
 }

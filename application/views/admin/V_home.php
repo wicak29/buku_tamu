@@ -33,8 +33,17 @@
 							<label>Instansi</label>
 							<select id="instansi" class="ui dropdown">
 								<option value="">Pilih Instansi</option>
+								<?php
+									// echo site_url('C_Pengunjungterdaftar/get_instansi');
+									foreach ($instansi as $row) 
+									{
+										echo '<option value="'.$row->idinstansi.'">'.$row->nama_instansi.'</option>';
+									}
+								?>
+								<option value="0">Lainnya</option>
+								<!-- <option value="">Pilih Instansi</option>
 								<option value="1">ITS</option>
-								<option value="0">Non ITS</option>
+								<option value="0">Non ITS</option> -->
 							</select>
 						</div>
 						<!-- NON ITS -->
@@ -99,17 +108,20 @@
   		$("#nonits").hide();
   		$("#instansi").change(function () 
   		{
-	        if ($("#instansi").val() == "1") 
+	        if ($("#instansi").val() == "0") 
 	        {
-	        	console.log("haha");
+	        	$("#nrp").hide();	
+	        	$("#nonits").show();	
+	        }
+	        else if ($("#instansi").val()==1) 
+	        {
 	        	$("#nrp").show();
 	        	$("#nonits").hide();
 	        }
-	        else if ($("#instansi").val() == "0") 
+	        else
 	        {
-	        	console.log("haha");
 	        	$("#nrp").hide();	
-	        	$("#nonits").show();	
+	        	$("#nonits").hide();
 	        }
 	    });
 

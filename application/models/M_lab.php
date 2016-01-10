@@ -26,4 +26,5 @@ class M_lab extends CI_Model
 		$query = $this->db->get('lab');
 		return $query->result();
 	}
+
 }
