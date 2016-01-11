@@ -31,7 +31,7 @@
   					<div class="ui stacked segment">
   						<div class="field">
 							<label>Instansi</label>
-							<select id="instansi" class="ui dropdown">
+							<select id="instansi" name="v_instansi" class="ui dropdown">
 								<option value="">Pilih Instansi</option>
 								<?php
 									// echo site_url('C_Pengunjungterdaftar/get_instansi');
@@ -40,17 +40,14 @@
 										echo '<option value="'.$row->idinstansi.'">'.$row->nama_instansi.'</option>';
 									}
 								?>
-								<option value="0">Lainnya</option>
-								<!-- <option value="">Pilih Instansi</option>
-								<option value="1">ITS</option>
-								<option value="0">Non ITS</option> -->
+								<option value=0>Lainnya</option>
 							</select>
 						</div>
 						<!-- NON ITS -->
 						<div id="nonits" class="field">
 							<label>Nama Instansi</label>
 							<div>
-								<input type="text" name="v_instansi" placeholder="ex : Universitas Indonesia">
+								<input type="text" name="v_newinstansi" placeholder="ex : Universitas Indonesia">
 							</div>
 						</div>
 						<!--END NON ITS-->
@@ -108,7 +105,7 @@
   		$("#nonits").hide();
   		$("#instansi").change(function () 
   		{
-	        if ($("#instansi").val() == "0") 
+	        if ($("#instansi").val() == 0) 
 	        {
 	        	$("#nrp").hide();	
 	        	$("#nonits").show();	
@@ -125,18 +122,18 @@
 	        }
 	    });
 
-	    jQuery.ajax({
-	           url: "/savelink",
-	           type:"POST",
-	           dataType: 'json',
-	           data:
-	           {
-	            'saved': x
-	           },
-	           async:true
-	        }).done(function(data) {
-	        	toastr["error"]("Konfigurasi pada switch tidak diperlukan!");
+	    // jQuery.ajax({
+	    //        url: "/savelink",
+	    //        type:"POST",
+	    //        dataType: 'json',
+	    //        data:
+	    //        {
+	    //         'saved': x
+	    //        },
+	    //        async:true
+	    //     }).done(function(data) {
+	    //     	toastr["error"]("Konfigurasi pada switch tidak diperlukan!");
 
-	   	});
+	   	// });
   	</script>
 </html>

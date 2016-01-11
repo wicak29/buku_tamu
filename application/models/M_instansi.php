@@ -7,16 +7,14 @@ class M_instansi extends CI_Model {
 	{
 		$this->db->insert('instansi',$data);
 	}
-	function get_instansi()
+
+	function get_instansi_byname($instansi)
 	{
-		$query=$this->db->get('instansi');
-		return $query->result;
-	}
-	// function get_instansi_byname($instansi)
-	// {
-	// 	$query=$this->db->get_where('instansi',array('nama_instansi'=>$instansi));
-	// 	return $query->result();
-	// } 
+		$this->db->limit(1);
+		$query=$this->db->get_where('instansi',array('nama_instansi'=>$instansi));
+		// return $query->result();
+		return $query->row();
+	} 
 
 	function get_instansi()
 	{

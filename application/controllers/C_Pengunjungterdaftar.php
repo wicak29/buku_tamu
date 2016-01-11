@@ -25,45 +25,53 @@ class C_pengunjungterdaftar extends CI_Controller {
 		$tahun=$this->input->post('v_tahun');
 		$kota=$this->input->post('v_kota');
 		$instansi=$this->input->post('v_instansi');
-		$nama_instansi=$this->input->post('v_nama_instansi');
 		$keperluan=$this->input->post('v_keperluan');
+		$new_instansi=$this->input->post('v_newinstansi');
 
 		if (!$nrp)
 		{
-			$nrp=0;
+			$nrp=NULL;
 		}
 
-		if (!$instansi)
+		if ($instansi==0)
 		{
-			$instansi=1;
+			$data_instansi = array(
+				'nama_instansi' => $new_instansi,
+				'delete_at' => 'NULL',
+				'update_at' => date('Y-m-d H:i:s')
+				);
+			$this->M_instansi->add_instansi($data_instansi);
+			$get_instansi=$this->M_instansi->get_instansi_byname("$new_instansi");
+
+			$data_PT = array(
+				'nama_pengunjung' => $nama,
+				'nrp_pengunjung' => $nrp,
+				'telp_pengunjung' => $telp,
+				'tahun_lahir' => $tahun,
+				'kota_asal' => $kota,
+				'instansi_idinstansi' => $get_instansi->idinstansi,
+				'delete_at' => 'NULL',
+				'update_at' => date('Y-m-d H:i:s')
+				 );
+		}
+		else
+		{
+			$data_PT = array(
+				'nama_pengunjung' => $nama,
+				'nrp_pengunjung' => $nrp,
+				'telp_pengunjung' => $telp,
+				'tahun_lahir' => $tahun,
+				'kota_asal' => $kota,
+				'instansi_idinstansi' => $instansi,
+				'delete_at' => 'NULL',
+				'update_at' => date('Y-m-d H:i:s')
+				 );
 		}
 
 		//checking whether the user already in our database or not
 		$res=$this->M_pengunjungterdaftar->check($nrp);		
-		//getting the intansi ID by input name
-		
-		$data_instansi = array(
-			'nama_instansi' => $nama_instansi,
-			'delete_at' => 'NULL',
-			'update_at' => date('Y-m-d')
-			);
-		//ini masih masalah
-		if($nama_instansi=='NON ITS')
-		{
-			$this->M_pengunjungterdaftar->add_instansi($data_instansi);
-		}
-		$data_PT = array(
-			'nama_pengunjung' => $nama,
-			'nrp_pengunjung' => $nrp,
-			'telp_pengunjung' => $telp,
-			'tahun_lahir' => $tahun,
-			'kota_asal' => $kota,
-			'instansi_idinstansi' => $get_instansi[0]->idinstansi,
-			'delete_at' => 'NULL',
-			'update_at' => date('Y-m-d')
-			 );
 
-		if(sizeof($res)<1)
+		if(sizeof($res)<1 or $nrp==0)
 		{
 			$this->M_pengunjungterdaftar->add_PT($data_PT);
 			$res=$this->M_pengunjungterdaftar->check($nrp);
@@ -72,7 +80,7 @@ class C_pengunjungterdaftar extends CI_Controller {
 		$data_PT_lab = array(
 			'pengunjung_terdaftar_idpengunjung' => $res[0]->idpengunjung,
 			'pengunjung_terdaftar_instansi_idinstansi' => $res[0]->instansi_idinstansi,
-			'lab_idlab' => $this->session->has_userdata('lab_idlab'),
+			'lab_idlab' => $this->session->has_userdata('lab_id'),
 			'jam_datang' => date("Y-m-d H:i:s"),
 			'jam_keluar' => '',
 			'keperluan' => $keperluan
@@ -81,5 +89,12 @@ class C_pengunjungterdaftar extends CI_Controller {
 		redirect(site_url('C_pengunjungterdaftar'));
 	}
 
+	public function add_instansi($data_instansi)
+	{
+		$this->M_instansi->add_instansi($data_instansi);
+	}
+	public function get_instansi()
+	{
+		$data['instansi'] = $this->M_instansi->get_instansi();
+	}
 }
-
