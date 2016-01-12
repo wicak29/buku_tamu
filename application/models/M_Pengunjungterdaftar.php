@@ -7,14 +7,26 @@ class M_pengunjungterdaftar extends CI_Model {
 		parent::__construct();
 		$this->load->database();
 	}
+
 	public function add_PT($data)
 	{
+
 		$this->db->insert('pengunjung_terdaftar',$data);
+		return $this->db->insert_id();
 	}
+
 	public function add_PT_lab($data)
 	{
-		$this->db->insert('pengunjung_terdaftar_has_lab',$data);
+		$query = $this->db->insert('pengunjung_terdaftar_has_lab',$data);
+		return $query;
 	}
+
+	public function get_by_id($id)
+	{
+		$query = $this->db->get_where('pengunjung_terdaftar', array('idpengunjung'=>$id));
+		return $query->row();
+	}
+
 	function check($nrp)
 	{
 		$query=$this->db->get_where('pengunjung_terdaftar',array('nrp_pengunjung'=>$nrp));

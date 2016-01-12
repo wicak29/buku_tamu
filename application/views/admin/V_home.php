@@ -27,7 +27,7 @@
   				<h2 class="ui inverted header">
   					<div class="content">SELAMAT DATANG DI LAB. </div>
   				</h2>
-  				<form name="form-penggunjung" action="<?php echo site_url('C_Pengunjungterdaftar/add');?>" method='POST' class="ui large form">
+  				<form id="form_masuk"name="form-penggunjung" action="<?php echo site_url('C_Pengunjungterdaftar/add');?>" method='POST' class="ui large form">
   					<div class="ui stacked segment">
   						<div class="field">
 							<label>Instansi</label>
@@ -83,7 +83,7 @@
 						</div>
 						<div id="keperluan" class="field">
 							<label for="v_keperluan">Keperluan</label>
-							<select name="v_keperluan" class="ui dropdown">
+							<select id="d_keperluan" name="v_keperluan" class="ui dropdown">
 								<option value="">Pilih Keperluan Anda</option>
 								<option value="Praktikum">Praktikum</option>
 								<option value="Buat Tugas">Buat Tugas</option>
@@ -91,10 +91,31 @@
 								<option value="Mengerjakan TA">Mengerjakan TA</option>
 								<option value="Lainnya">Lainnya</option>
 							</select>
-						</div>
-						<button class="ui fluid large blue submit button" type="submit" name="btn_login" value="login">Masuk Lab</button>
+						</div>					
+						<button type="submit" class="ui fluid large blue submit button">
+							Masuk Lab.</button>
   					</div>
+  					<!-- <?php echo $this->session->flashdata('notif'); ?> -->
 				</form>
+				<!-- MODAL BERHASIL -->
+				<div id="berhasil" class="ui basic modal">
+					<i class="close icon"></i>
+				  	<div class="header">
+				    	BERHASIL!
+				  	</div>
+				  	<div class="image content">
+				    	<div class="image">
+				      		<i class="smile icon"></i>
+					    </div>
+				    	<div class="description">
+				      		<h4>Yay! Sekarang kamu udah bisa nikmatin fasilitas Lab.</h4>
+				    	</div>
+				 	</div>
+				  	<div id="oke" class="actions">
+		        		<button  class="ui blue close button" onclick="close_berhasil(); "><i class="checkmark icon"></i>OK!</button>
+				  	</div>
+				</div>
+				<!-- END MODAL-->
   			</div>
   		</div>
   	</body>
@@ -122,6 +143,31 @@
 	        }
 	    });
 
+  		$('#instansi').dropdown();
+  		$('#d_keperluan').dropdown();
+
+  		$("berhasil").hide();
+
+  		function submitForm()
+  		{
+  			$('#form_masuk').submit();
+  		}
+
+  		$(document).ready(function(){
+  			<?php if ($this->session->flashdata('notif')) { ?>
+  				berhasil();
+  			<?php } ?>
+  		});
+
+  		function berhasil()
+  		{
+  			$('.ui.basic.modal').modal('show');
+  		}
+
+  		function close_berhasil()
+  		{
+  			$('.ui.basic.modal').modal('hide');
+  		}
 	    // jQuery.ajax({
 	    //        url: "/savelink",
 	    //        type:"POST",

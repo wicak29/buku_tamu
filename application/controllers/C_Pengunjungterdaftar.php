@@ -28,6 +28,7 @@ class C_pengunjungterdaftar extends CI_Controller {
 		$keperluan=$this->input->post('v_keperluan');
 		$new_instansi=$this->input->post('v_newinstansi');
 
+
 		if (!$nrp)
 		{
 			$nrp=NULL;
@@ -73,20 +74,29 @@ class C_pengunjungterdaftar extends CI_Controller {
 
 		if(sizeof($res)<1 or $nrp==0)
 		{
-			$this->M_pengunjungterdaftar->add_PT($data_PT);
-			$res=$this->M_pengunjungterdaftar->check($nrp);
+			$insert1 = $this->M_pengunjungterdaftar->add_PT($data_PT);
+			$res = $this->M_pengunjungterdaftar->get_by_id($insert1);
 		}
 
 		$data_PT_lab = array(
-			'pengunjung_terdaftar_idpengunjung' => $res[0]->idpengunjung,
-			'pengunjung_terdaftar_instansi_idinstansi' => $res[0]->instansi_idinstansi,
+			'pengunjung_terdaftar_idpengunjung' => $res->idpengunjung,
+			'pengunjung_terdaftar_instansi_idinstansi' => $res->instansi_idinstansi,
 			'lab_idlab' => $this->session->has_userdata('lab_id'),
 			'jam_datang' => date("Y-m-d H:i:s"),
 			'jam_keluar' => '',
 			'keperluan' => $keperluan
 			);		
-		$this->M_pengunjungterdaftar->add_PT_lab($data_PT_lab);
-		redirect(site_url('C_pengunjungterdaftar'));
+		$insert2 = $this->M_pengunjungterdaftar->add_PT_lab($data_PT_lab);
+
+		//cek apakah insert data berhasil
+		// print_r($insert1);
+		// print_r($insert2);
+		if ($insert1 && $insert2) 
+		{
+			$this->session->set_flashdata('notif', 1);
+			// echo "ganteng";
+		}
+		redirect(site_url('C_admin'));
 	}
 
 	public function add_instansi($data_instansi)
