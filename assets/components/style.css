@@ -3,6 +3,15 @@ body
     background-color: dodgerblue;
 }
 
+#bg 
+{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 body > .grid
 {
     height: 100%;
@@ -24,4 +33,5 @@ body > .grid
     margin-top: 40px;
     max-width: 600px;
     width: 450px;
+    z-index: 1;
 }

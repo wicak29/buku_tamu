@@ -27,11 +27,16 @@ class C_pengunjungterdaftar extends CI_Controller {
 		$instansi=$this->input->post('v_instansi');
 		$keperluan=$this->input->post('v_keperluan');
 		$new_instansi=$this->input->post('v_newinstansi');
-
+		$new_keperluan=$this->input->post('v_nkeperluan');
 
 		if (!$nrp)
 		{
 			$nrp=NULL;
+		}
+
+		if ($new_keperluan)
+		{
+			$keperluan = $new_keperluan;
 		}
 
 		if ($instansi==0)
