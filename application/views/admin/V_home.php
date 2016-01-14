@@ -264,7 +264,7 @@
 		          },
 		          {
 		            type   : 'minLength[10]',
-		            prompt : 'Your password must be at least {ruleValue} characters'
+		            prompt : 'Your id must be at least {ruleValue} characters'
 		          }
 		        ]
 		      },
