@@ -29,6 +29,9 @@ class C_pengunjungterdaftar extends CI_Controller {
 		$new_instansi=$this->input->post('v_newinstansi');
 		$new_keperluan=$this->input->post('v_nkeperluan');
 
+		//cek instansi udah ada apa ngga
+		$cek_inst = $this->M_instansi->cek_instansi($new_instansi);		
+
 		if (!$nrp)
 		{
 			$nrp=NULL;
@@ -46,7 +49,11 @@ class C_pengunjungterdaftar extends CI_Controller {
 				'delete_at' => NULL,
 				'update_at' => date('Y-m-d H:i:s')
 				);
-			$this->M_instansi->add_instansi($data_instansi);
+
+			if(sizeof($cek_inst)<1)
+			{
+				$this->M_instansi->add_instansi($data_instansi);
+			}			
 			$get_instansi=$this->M_instansi->get_instansi_byname("$new_instansi");
 
 			$data_PT = array(

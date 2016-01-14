@@ -245,6 +245,7 @@
     			blurring: true
   			}).modal('hide');
   		}
+  		
     	var validationRule={
 		      v_nama: {
 		        identifier: 'v_nama',

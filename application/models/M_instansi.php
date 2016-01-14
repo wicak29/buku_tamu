@@ -22,4 +22,10 @@ class M_instansi extends CI_Model {
 
 		return $query->result();
 	}
+
+	function cek_instansi($cek)
+	{
+		$query = $this->db->get_where('instansi', array('nama_instansi'=>$cek));
+		return $query->row();
+	}
 }
