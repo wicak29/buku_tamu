@@ -30,6 +30,6 @@ class M_pengunjungterdaftar extends CI_Model {
 	function check($nrp)
 	{
 		$query=$this->db->get_where('pengunjung_terdaftar',array('nrp_pengunjung'=>$nrp));
-		return $query->result();
+		return $query->row();
 	}
 }

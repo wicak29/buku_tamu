@@ -29,7 +29,7 @@
   				<h2 class="ui inverted header">
   					<div class="content">SELAMAT DATANG DI LAB. </div>
   				</h2>
-  				<form id="form_masuk"name="form-penggunjung" action="<?php echo site_url('C_Pengunjungterdaftar/add');?>" method='POST' class="ui large form">
+  				<form id="form_masuk"name="form-penggunjung" action="<?php echo site_url('C_Pengunjungterdaftar/add');?>" method='POST' class="ui large form segment error">
   					<div class="ui stacked segment">
   						<div class="field">
 							<label>Instansi</label>
@@ -39,6 +39,11 @@
 									// echo site_url('C_Pengunjungterdaftar/get_instansi');
 									foreach ($instansi as $row) 
 									{
+										if($row->idinstansi==1)
+										{
+											echo '<option value="'.$row->idinstansi.'" selected="">'.$row->nama_instansi.'</option>';	
+										}
+										else 
 										echo '<option value="'.$row->idinstansi.'">'.$row->nama_instansi.'</option>';
 									}
 								?>
@@ -55,13 +60,33 @@
 						<!--END NON ITS-->
 						<div id="id" class="field">
 							<label>Nomor Identitas (NIP/NRP/NIM/KTP/SIM)</label>
-							<div class="ui input">
-								<input type="radio" name="idPengenal" value="nip">NIP<br>
-								<input type="radio" name="idPengenal" value="nrp">NRP<br>
-								<input type="radio" name="idPengenal" value="nim">NIM<br>
-								<input type="radio" name="idPengenal" value="ktp">KTP<br>
-								<input type="radio" name="idPengenal" value="sim">SIM<br>
-							</div>
+								<div class="five fields">
+	    						<div class="field">	
+	    							<div class="ui radio checkbox">
+										<input type="radio" name="idPengenal" value="nrp" checked=""><label>NRP</label>
+	    							</div>
+	    						</div>
+								<div class="field">
+								   	<div class="ui radio checkbox">
+										<input type="radio" name="idPengenal" value="nip"><label>NIP</label>
+									</div>
+								</div>
+								<div class="field">
+								   	<div class="ui radio checkbox">
+										<input type="radio" name="idPengenal" value="ktp"><label>KTP</label>
+									</div>
+								</div>
+								<div class="field">
+								   	<div class="ui radio checkbox">
+										<input type="radio" name="idPengenal" value="sim"><label>SIM</label>
+									</div>
+								</div>
+								<div class="field">
+								   	<div class="ui radio checkbox">
+										<input type="radio" name="idPengenal" value="nim"><label>NIM</label>
+									</div>
+								</div>	
+					  		</div>	
 							<div class="ui input">
 								<input type="number" name="v_nrp" placeholder="eg : 5113100999">
 							</div>
@@ -220,42 +245,196 @@
     			blurring: true
   			}).modal('hide');
   		}
+    	var validationRule={
+		      v_nama: {
+		        identifier: 'v_nama',
+		        rules: [
+		          {
+		            type   : 'empty',
+		            prompt : 'Please enter your name'
+		          }
+		        ]
+		      },
+		      v_nrp: {
+		        identifier: 'v_nrp',
+		        rules: [
+		          {
+		            type   : 'empty',
+		            prompt : 'Please enter your id'
+		          },
+		          {
+		            type   : 'minLength[10]',
+		            prompt : 'Your password must be at least {ruleValue} characters'
+		          }
+		        ]
+		      },
+		      v_telp: {
+		        identifier: 'v_telp',
+		        rules: [
+		          {
+		            type   : 'empty',
+		            prompt : 'Please enter your phone number'
+		          }
+		        ]
+		      },
+		      v_tahun: {
+		        identifier: 'v_tahun',
+		        rules: [
+		          {
+		            type   : 'empty',
+		            prompt : 'Please enter your birth year'
+		          }
+		        ]
+		      },
+		       v_keperluan: {
+		        identifier: 'v_keperluan',
+		        rules: [
+		          {
+		            type   : 'empty',
+		            prompt : 'Please enter your bussines matter'
+		          }
+		        ]
+		      },
+		      v_kota: {
+		        identifier: 'v_kota',
+		        rules: [
+		          {
+		            type   : 'empty',
+		            prompt : 'Please enter your home city'
+		          }
+		        ]
+		      }
+		    }
+		    //cheat
+		    $('[name=v_instansi]').change(function(){
+		    	if($('[name=v_newinstansi').is(":visible"))
+		    	{
+		    		validationRule.v_newinstansi={}
+			    	validationRule.v_newinstansi.rules=[]
+			    	validationRule.v_newinstansi.rules[0]=
+			    	{
+			    		type   : 'empty',
+			            prompt : 'Plese enter your institute'	
+			    	}
+			    	$('[name=v_newinstansi').val("")	
+		    	}
+		    	else{ 
+		    		//this is cheat
+		  			$('[name=v_newinstansi').val(0)	
+		    	}
+		    	$('.ui.form')
+				  .form({
+				  	inline : true,
+				    fields: validationRule
+				  });
+			 })
 
-  		$('[name=v_nrp]').change(function(){
-  			var val = ""
-  			$("input:radio[name=idPengenal]").click(function() {
-			    val = $(this).val();
-			});
-  			//var val = $('[name=idPengenal]').val();
-  			console.log(val);
-  			if(val == 'nip')
-  			{
-  				if($('[name=v_nrp]').val().length!=18)
-  				{
-  					sweetAlert('Karakter NIP Tidak Sesuai','Panjang NIP harus 18 karakter','error');
-  				}
-  			}
-  			else if(val == 'nrp')
-  			{
-  				if($('[name=v_nrp]').val().length!=10)
-  				{
-  					sweetAlert('Karakter NRP Tidak Sesuai','Panjang NRP harus 10 karakter','error');
-  				}
-  			}
-  			else if(val == 'ktp')
-  			{
-  				if($('[name=v_nrp]').val().length!=16)
-  				{
-  					sweetAlert('Karakter KTP Tidak Sesuai','Panjang KTP harus 16 karakter','error');
-  				}
-  			}
-  			else if(val == 'sim')
-  			{
-  				if($('[name=v_nrp]').val().length!=17)
-  				{
-  					sweetAlert('Karakter SIM Tidak Sesuai','Panjang SIM harus 17 karakter','error');
-  				}
-  			}
-  		});
+		    //cheat
+		    $('[name=v_keperluan]').change(function(){
+		    	if($('[name=v_nkeperluan').is(":visible"))
+		    	{
+		    		validationRule.v_nkeperluan={}
+			    	validationRule.v_nkeperluan.rules=[]
+			    	validationRule.v_nkeperluan.rules[0]=
+			    	{
+			    		type   : 'empty',
+			            prompt : 'Plese enter your bussines matter'	
+			    	}
+			    	$('[name=v_nkeperluan').val("")	
+		    	}
+		    	else{ 
+		    		//this is the cheat
+		  			$('[name=v_nkeperluan').val(0)	
+		    	}
+		    	$('.ui.form')
+				  .form({
+				  	inline : true,
+				    fields: validationRule
+				  });
+			 })
+
+		    $('[name=idPengenal]').change(function(){
+		    	if($('[name=idPengenal]:checked').val()=='nrp')
+		    	validationRule.v_nrp.rules[1]=
+		          {
+		            type   : 'minLength[10]',
+		            prompt : 'NRP must be at least {ruleValue} characters'
+		          }
+		        else if($('[name=idPengenal]:checked').val()=='nip')
+		    	validationRule.v_nrp.rules[1]=
+		          {
+		            type   : 'minLength[18]',
+		            prompt : 'NIP must be at least {ruleValue} characters'
+		          }
+		        else if($('[name=idPengenal]:checked').val()=='ktp')
+		    	validationRule.v_nrp.rules[1]=
+		          {
+		            type   : 'minLength[18]',
+		            prompt : 'KTP must be at least {ruleValue} characters'
+		          }
+		        else if($('[name=idPengenal]:checked').val()=='sim')
+		    	validationRule.v_nrp.rules[1]=
+		          {
+		            type   : 'minLength[18]',
+		            prompt : 'SIM must be at least {ruleValue} characters'
+		          }
+		        else if($('[name=idPengenal]:checked').val()=='nim')
+		    	validationRule.v_nrp.rules[1]=
+		          {
+		            type   : 'minLength[18]',
+		            prompt : 'NIM must be at least {ruleValue} characte	rs'
+		          }
+
+		       	 $('.ui.form')
+				  .form({
+				  	inline : true,
+				    fields: validationRule
+				  });
+		    });
+		   ;
+	    $('.ui.form')
+		  .form({
+		  	inline : true,
+		    fields: validationRule
+		  });
+
+
+  	//PUNYA RISMA
+  	// 	$('[name=v_nrp]').change(function(){
+  			// var val = ""
+  			// $("input:radio[name=idPengenal]").click(function() {
+			//     val = $(this).val();
+			// });
+  	// 		var val = $('[name=idPengenal]').val();
+  	// 		console.log(val);
+  	// 		if(val == 'nip')
+  	// 		{
+  	// 			if($('[name=v_nrp]').val().length!=18)
+  	// 			{
+  	// 				sweetAlert('Karakter NIP Tidak Sesuai','Panjang NIP harus 18 karakter','error');
+  	// 			}
+  	// 		}
+  	// 		else if(val == 'nrp')
+  	// 		{
+  	// 			if($('[name=v_nrp]').val().length!=10)
+  	// 			{
+  	// 				sweetAlert('Karakter NRP Tidak Sesuai','Panjang NRP harus 10 karakter','error');
+  	// 			}
+  	// 		}
+  	// 		else if(val == 'ktp')
+  	// 		{
+  	// 			if($('[name=v_nrp]').val().length!=16)
+  	// 			{
+  	// 				sweetAlert('Karakter KTP Tidak Sesuai','Panjang KTP harus 16 karakter','error');
+  	// 			}
+  	// 		}
+  	// 		else if(val == 'sim')
+  	// 		{
+  	// 			if($('[name=v_nrp]').val().length!=17)
+  	// 			{
+  	// 				sweetAlert('Karakter SIM Tidak Sesuai','Panjang SIM harus 17 karakter','error');
+  	// 			}
+  	// 		}
+  	// 	});
   	</script>
 </html>
