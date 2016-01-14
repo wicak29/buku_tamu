@@ -305,7 +305,7 @@
 		        ]
 		      }
 		    }
-		    //cheat
+
 		    $('[name=v_instansi]').change(function(){
 		    	if($('[name=v_newinstansi').is(":visible"))
 		    	{
@@ -318,18 +318,18 @@
 			    	}
 			    	$('[name=v_newinstansi').val("")	
 		    	}
-		    	else{ 
-		    		//this is cheat
-		  			$('[name=v_newinstansi').val(0)	
-		    	}
+		  			else delete validationRule.v_newinstansi	
+		    
+		    	$('.ui.form').unbind();
 		    	$('.ui.form')
 				  .form({
+				  	on: 'blur',
 				  	inline : true,
 				    fields: validationRule
 				  });
 			 })
 
-		    //cheat
+	
 		    $('[name=v_keperluan]').change(function(){
 		    	if($('[name=v_nkeperluan').is(":visible"))
 		    	{
@@ -342,12 +342,12 @@
 			    	}
 			    	$('[name=v_nkeperluan').val("")	
 		    	}
-		    	else{ 
-		    		//this is the cheat
-		  			$('[name=v_nkeperluan').val(0)	
-		    	}
+		    	else delete validationRule.v_nkeperluan
+
+		    	$('.ui.form').unbind();
 		    	$('.ui.form')
 				  .form({
+				  	on: 'blur',
 				  	inline : true,
 				    fields: validationRule
 				  });
@@ -384,9 +384,10 @@
 		            type   : 'minLength[18]',
 		            prompt : 'NIM must be at least {ruleValue} characte	rs'
 		          }
-
+		         $('.ui.form').unbind();
 		       	 $('.ui.form')
 				  .form({
+				  	on: 'blur',
 				  	inline : true,
 				    fields: validationRule
 				  });
@@ -394,6 +395,7 @@
 		   ;
 	    $('.ui.form')
 		  .form({
+		  	on: 'blur',
 		  	inline : true,
 		    fields: validationRule
 		  });
