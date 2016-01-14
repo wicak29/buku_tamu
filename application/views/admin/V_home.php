@@ -19,6 +19,8 @@
 	    <script src="<?php echo base_url('assets'); ?>/jquery-2.1.4.min.js"></script>
 		<script src="<?php echo base_url('assets'); ?>/semantic.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/components/style.css">
+		<script src="<?php echo base_url('assets'); ?>/sweetalert.min.js"></script> 
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/sweetalert.css">
 	</head>
   	<body>
   		<div id="particles-js"></div>
@@ -51,8 +53,15 @@
 							</div>
 						</div>
 						<!--END NON ITS-->
-						<div id="nrp" class="field">
-							<label>NRP</label>
+						<div id="id" class="field">
+							<label>Nomor Identitas (NIP/NRP/NIM/KTP/SIM)</label>
+							<div class="ui input">
+								<input type="radio" name="idPengenal" value="nip">NIP<br>
+								<input type="radio" name="idPengenal" value="nrp">NRP<br>
+								<input type="radio" name="idPengenal" value="nim">NIM<br>
+								<input type="radio" name="idPengenal" value="ktp">KTP<br>
+								<input type="radio" name="idPengenal" value="sim">SIM<br>
+							</div>
 							<div class="ui input">
 								<input type="number" name="v_nrp" placeholder="eg : 5113100999">
 							</div>
@@ -146,25 +155,24 @@
 	<script src="<?php echo base_url('assets/particles');?>/demo/js/app.js"></script>
 	<!--END PARTICLE-->
 
-  	<script>
-  		$("#nrp").hide();	
+  	<script>	
   		$("#nonits").hide();
   		$('#nkeperluan').hide();
   		$("#instansi").change(function () 
   		{
 	        if ($("#instansi").val() == 0) 
 	        {
-	        	$("#nrp").hide();	
+	        		
 	        	$("#nonits").show();	
 	        }
 	        else if ($("#instansi").val()==1) 
 	        {
-	        	$("#nrp").show();
+	        	
 	        	$("#nonits").hide();
 	        }
 	        else
 	        {
-	        	$("#nrp").hide();	
+	        		
 	        	$("#nonits").hide();
 	        }
 	    });
@@ -212,5 +220,42 @@
     			blurring: true
   			}).modal('hide');
   		}
+
+  		$('[name=v_nrp]').change(function(){
+  			var val = ""
+  			$("input:radio[name=idPengenal]").click(function() {
+			    val = $(this).val();
+			});
+  			//var val = $('[name=idPengenal]').val();
+  			console.log(val);
+  			if(val == 'nip')
+  			{
+  				if($('[name=v_nrp]').val().length!=18)
+  				{
+  					sweetAlert('Karakter NIP Tidak Sesuai','Panjang NIP harus 18 karakter','error');
+  				}
+  			}
+  			else if(val == 'nrp')
+  			{
+  				if($('[name=v_nrp]').val().length!=10)
+  				{
+  					sweetAlert('Karakter NRP Tidak Sesuai','Panjang NRP harus 10 karakter','error');
+  				}
+  			}
+  			else if(val == 'ktp')
+  			{
+  				if($('[name=v_nrp]').val().length!=16)
+  				{
+  					sweetAlert('Karakter KTP Tidak Sesuai','Panjang KTP harus 16 karakter','error');
+  				}
+  			}
+  			else if(val == 'sim')
+  			{
+  				if($('[name=v_nrp]').val().length!=17)
+  				{
+  					sweetAlert('Karakter SIM Tidak Sesuai','Panjang SIM harus 17 karakter','error');
+  				}
+  			}
+  		});
   	</script>
 </html>
