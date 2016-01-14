@@ -39,4 +39,8 @@ class C_su_admin extends CI_Controller {
 		$this->C_lab->add();
 	}
 	
+	public function add_admin()
+	{
+		$this->C_admin->add();
+	}
 }

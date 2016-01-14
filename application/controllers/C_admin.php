@@ -48,4 +48,11 @@ class C_admin extends CI_Controller {
 			);
 		echo $this->M_admin->add($data);
 	}
+
+	public function delete()
+	{
+		$id = $this->input->post('idadmin');
+		$data = array('delete_at' => date('Y-m-d'));
+		echo $this->M_admin->delete($data, $id);
+	}
 }

@@ -19,4 +19,9 @@ class M_admin extends CI_Model {
 		$query=$this->db->get_where('admin',array('username'=>$username,'password'=>sha1($password)));	
 		return $query->result();
 	}
+
+	public function delete($data,$id)
+	{
+		return $this->db->update('admin', $data, array('idadmin' => $id));
+	}
 }
