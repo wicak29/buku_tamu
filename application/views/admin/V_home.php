@@ -5,7 +5,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<!-- <meta name="viewport" content="width=device-width, initial-state=1.0, maximum-scale=1.0"> -->
 
-
 	    <meta name="description" content="Developed By RnD Lab. @JK - Informatics ITS">
 	    <meta name="author" content="RnD @JK">
 	    <meta name="keywords" content="Buku Tamu, Ganteng, Keren, Aplikasi, Panutan">
@@ -22,7 +21,8 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/components/style.css">
 	</head>
   	<body>
-  		<div class="ui middle aligned center aligned grid">
+  		<div id="particles-js"></div>
+			<div class="ui middle aligned center aligned grid">
   			<div class="column-home">
   				<h2 class="ui inverted header">
   					<div class="content">SELAMAT DATANG DI LAB. </div>
@@ -47,38 +47,38 @@
 						<div id="nonits" class="field">
 							<label>Nama Instansi</label>
 							<div>
-								<input type="text" name="v_newinstansi" placeholder="ex : Universitas Indonesia">
+								<input type="text" name="v_newinstansi" placeholder="eg : Universitas Indonesia">
 							</div>
 						</div>
 						<!--END NON ITS-->
 						<div id="nrp" class="field">
 							<label>NRP</label>
 							<div class="ui input">
-								<input type="number" name="v_nrp" placeholder="ex : 5113100999">
+								<input type="number" name="v_nrp" placeholder="eg : 5113100999">
 							</div>
 						</div>
 						<div id="name" class="field">
 							<label>Nama Lengkap</label>
 							<div class="ui input">
-								<input type="text" name="v_nama" placeholder="ex : Lionel Messi">
+								<input type="text" name="v_nama" placeholder="eg : Lionel Messi">
 							</div>
 						</div>
 						<div id="ttl" class="field">
 							<label>Tahun Lahir</label>
 							<div class="ui input">
-								<input type="text" name="v_tahun" placeholder="ex : 1995">
+								<input type="text" name="v_tahun" placeholder="eg : 1995">
 							</div>
 						</div>
 						<div id="kota" class="field">
 							<label>Kota Asal</label>
 							<div class="ui input">
-								<input type="text" name="v_kota" placeholder="ex : Surabaya">
+								<input type="text" name="v_kota" placeholder="eg : Surabaya">
 							</div>
 						</div>
 						<div id="hp" class="field">
 							<label>Nomor HP</label>
 							<div class="ui input">
-								<input type="text" name="v_telp" placeholder="ex : 081234567890">
+								<input type="text" name="v_telp" placeholder="eg : 081234567890">
 							</div>
 						</div>
 						<div id="keperluan" class="field">
@@ -91,28 +91,34 @@
 								<option value="Mengerjakan TA">Mengerjakan TA</option>
 								<option value="Lainnya">Lainnya</option>
 							</select>
-						</div>					
+						</div>
+						<div id="nkeperluan" class="field">
+							<div class="ui input">
+								<input type="text" name="v_nkeperluan" placeholder="Keperluan Lainnya (eg : Mencuci Motor)">
+							</div>
+						</div>
 						<button type="submit" class="ui fluid large blue submit button">
 							Masuk Lab.</button>
   					</div>
-  					<!-- <?php echo $this->session->flashdata('notif'); ?> -->
 				</form>
 				<!-- MODAL BERHASIL -->
-				<div id="berhasil" class="ui basic modal">
-					<i class="close icon"></i>
-				  	<div class="header">
-				    	BERHASIL!
-				  	</div>
-				  	<div class="image content">
-				    	<div class="image">
-				      		<i class="smile icon"></i>
-					    </div>
-				    	<div class="description">
-				      		<h4>Yay! Sekarang kamu udah bisa nikmatin fasilitas Lab.</h4>
+
+				<div id="berhasil" class="ui basic small modal">
+				  	<div class="ui content" style="text-align : center; ">
+				  		<h2>YAY!</h2>
+				  		<!-- <div class="ui image">
+				  			<img src="<?php echo base_url('assets/images');?>/yes.gif"> 
+				  		</div> -->
+				    	<div class="ui description" style="text-align : center;">
+				    		<img src="<?php echo base_url('assets/images');?>/yes.gif" style="margin-bottom : 10px;"> 
+				      		<p>Sekarang kamu udah bisa nikmatin fasilitas Lab :)</p>
 				    	</div>
-				 	</div>
-				  	<div id="oke" class="actions">
-		        		<button  class="ui blue close button" onclick="close_berhasil(); "><i class="checkmark icon"></i>OK!</button>
+				  	</div>
+				  	<div id="oke" class="actions" style="text-align : center;">
+				    	<div class="ui blue right icon center aligned button" onclick="close_berhasil();">
+				        	<i class="checkmark icon"></i>
+				        	OKAY
+				    	</div>
 				  	</div>
 				</div>
 				<!-- END MODAL-->
@@ -121,9 +127,29 @@
   	</body>
   	<footer>
   	</footer>
+
+  	<!--CACING
+	<script type="text/javascript" src="<?php echo base_url('assets/background');?>/libs/sketch.js"></script>
+	<script type="text/javascript" src="<?php echo base_url('assets/background');?>/src/glassyWorms.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#bg').glassyWorms({
+				colors: ['#fff', '#00ccff'], 
+				useStyles: true
+			});
+		});
+	</script>
+	END CACING-->
+
+	<!-- PARTICLE-->
+	<script src="<?php echo base_url('assets/particles');?>/particles.js"></script>
+	<script src="<?php echo base_url('assets/particles');?>/demo/js/app.js"></script>
+	<!--END PARTICLE-->
+
   	<script>
   		$("#nrp").hide();	
   		$("#nonits").hide();
+  		$('#nkeperluan').hide();
   		$("#instansi").change(function () 
   		{
 	        if ($("#instansi").val() == 0) 
@@ -141,6 +167,18 @@
 	        	$("#nrp").hide();	
 	        	$("#nonits").hide();
 	        }
+	    });
+
+	    $('#d_keperluan').change(function ()
+	    {
+	    	if ($('#d_keperluan').val() == 'Lainnya')
+	    	{
+	    		$('#nkeperluan').show();
+	    	}
+	    	else
+	    	{
+	    		$('#nkeperluan').hide();
+	    	}
 	    });
 
   		$('#instansi').dropdown();
@@ -161,25 +199,18 @@
 
   		function berhasil()
   		{
-  			$('.ui.basic.modal').modal('show');
+  			$('.basic.small.modal').modal({
+    			blurring: true
+  			}).
+  			modal('setting', 'transition', 'bounce').
+  			modal('show');
   		}
 
   		function close_berhasil()
   		{
-  			$('.ui.basic.modal').modal('hide');
+  			$('.basic.small.modal').modal({
+    			blurring: true
+  			}).modal('hide');
   		}
-	    // jQuery.ajax({
-	    //        url: "/savelink",
-	    //        type:"POST",
-	    //        dataType: 'json',
-	    //        data:
-	    //        {
-	    //         'saved': x
-	    //        },
-	    //        async:true
-	    //     }).done(function(data) {
-	    //     	toastr["error"]("Konfigurasi pada switch tidak diperlukan!");
-
-	   	// });
   	</script>
 </html>
