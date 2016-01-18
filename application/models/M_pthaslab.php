@@ -18,8 +18,9 @@ class M_pthaslab extends CI_Model
 		$this->db->from('pengunjung_terdaftar_has_lab');
 		$this->db->join('pengunjung_terdaftar','pengunjung_terdaftar_has_lab.pengunjung_terdaftar_idpengunjung = pengunjung_terdaftar.idpengunjung');
 		$this->db->join('instansi', 'pengunjung_terdaftar.instansi_idinstansi = instansi.idinstansi');
-		$where = 'pengunjung_terdaftar_has_lab.lab_idlab ='.$id.' and date(jam_datang)=curdate()';
+		$where = 'pengunjung_terdaftar_has_lab.lab_idlab ='.$id;
 		$this->db->where($where);
+		$this->db->order_by('jam_datang','DESC');
 		return $this->db->get();
 	}
 }

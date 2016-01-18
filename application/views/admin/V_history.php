@@ -21,11 +21,14 @@
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/components/style.css">
 		<script src="<?php echo base_url('assets'); ?>/sweetalert.min.js"></script> 
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/sweetalert.css">
+		<script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
+
 	</head>
   	<body>
   		<div id="particles-js"></div>
 		<div class="ui middle aligned center aligned grid">
-  			<div class="column-home">
+  			<div class="double column-home">
   				<ul style="text-align:right;">
   					<a href="<?php echo base_url()?>index.php/C_admin"><i class="edit icon"></i> Masuk Lab</a>
   					<a href="<?php echo base_url()?>index.php/C_admin/history"><i class="history icon"></i> History</a>
@@ -34,15 +37,10 @@
   				<h2 class="ui inverted header">
   					<div class="content">PENGUNJUNG LAB. </div>
   				</h2>
-  				<div class="ui mini action input">
-					<input type="text" name="cari" placeholder="Search...">
-						<button class="ui icon button">
-							<i class="search icon"></i>
-						</button>
-				</div>
-  				<table class="ui fixed single line celled table">
+  				<table class="ui celled padded table" id="example" cellspacing="0" width="100%">
   					<thead style="text-align:center;">
   						<tr>
+  							<th>No</th>
   							<th>Pengunjung</th>
   							<th>Instansi</th>
   							<th>Tanggal</th>
@@ -52,15 +50,18 @@
   					</thead>
   					<tbody>
   					<?php 
+  						$i=1;
   						foreach ($history as $r)
   						{
   							echo '<tr>';
+  							echo '<td>'.$i.'</td>';
   							echo '<td>'. $r['nama_pengunjung'].'</td>';
   							echo '<td>'. $r['nama_instansi'].'</td>';
   							echo '<td>'. $r['tanggal'].'</td>';
   							echo '<td>'. $r['jam'].'</td>';
   							echo '<td>'. $r['keperluan'].'</td>';
   							echo '</tr>';
+  							$i = $i + 1;
   						}
   					?>
   					</tbody>
@@ -88,5 +89,11 @@
 	<script src="<?php echo base_url('assets/particles');?>/particles.js"></script>
 	<script src="<?php echo base_url('assets/particles');?>/demo/js/app.js"></script>
 	<!--END PARTICLE-->
-
+	<script>
+			$(document).ready(function() {
+			    $('#example').DataTable( {
+			        "pagingType": "full_numbers"
+			    } );
+			} );
+		</script>
 </html>
