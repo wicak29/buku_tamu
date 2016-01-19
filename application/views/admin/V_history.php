@@ -28,7 +28,7 @@
   	<body>
   		<div id="particles-js"></div>
 		<div class="ui middle aligned center aligned grid">
-  			<div class="double column-home">
+  			<div class="double column-history">
   				<ul style="text-align:right;">
   					<a href="<?php echo base_url()?>index.php/C_admin"><i class="edit icon"></i> Masuk Lab</a>
   					<a href="<?php echo base_url()?>index.php/C_admin/history"><i class="history icon"></i> History</a>

@@ -51,3 +51,11 @@ body > .grid
     width: 450px;
     z-index: 1;
 }
+
+.column-history
+{
+    margin-top: 40px;
+    max-width: 900px;
+    width: 900px;
+    z-index: 1;
+}

@@ -24,10 +24,10 @@
 	</head>
   	<body>
   		<div id="particles-js"></div>
-			<div class="ui middle aligned center aligned grid">
+		<div class="ui middle aligned center aligned grid">
   			<div class="column-home">
   				<ul style="text-align:right;">
-  					<a href="<?php echo base_url()?>index.php/C_admin"><i class="edit icon"></i> Masuk Lab</a>
+  					<a href="<?php echo base_url()?>index.php/C_admin"><i class="user icon"></i> Masuk Lab</a>
   					<a href="<?php echo base_url()?>index.php/C_admin/history"><i class="history icon"></i> History</a>
 	                <a href="<?php echo base_url()?>index.php/C_auth/logout"><i class="sign out icon"></i> Logout</a>
 	            </ul>
@@ -35,7 +35,7 @@
   					<div class="content">SELAMAT DATANG DI LAB. </div>
   				</h2>
   				<form id="form_masuk"name="form-penggunjung" action="<?php echo site_url('C_Pengunjungterdaftar/add');?>" method='POST' class="ui large form segment error">
-  					<div class="ui stacked segment">
+  					<div class="ui stacked">
   						<div class="field">
 							<label>Instansi</label>
 							<select id="instansi" name="v_instansi" class="ui dropdown">
