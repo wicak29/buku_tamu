@@ -24,13 +24,25 @@
 	</head>
   	<body>
   		<div id="particles-js"></div>
+
+	    <!--MENU-->
+  		<div class="overlay fixed" style="position: fixed; top: 10px; left: 10; z-index: 1;">
+	      <div class="ui labeled blue icon vertical menu">
+	      	<a href="<?php echo base_url()?>index.php/C_admin" class="item active">
+	        	<i class="user icon"></i> Home Lab
+	        </a>
+	        <a href="<?php echo base_url()?>index.php/C_admin/history" class="item">
+	        	<i class="history icon"></i> Riwayat
+	        </a>
+	        <a href="<?php echo base_url()?>index.php/C_auth/logout" class="item">
+	        	<i class="sign out icon"></i> Logout
+	        </a>
+	      </div>
+	    </div>
+  		<!--END MENU-->
+
 		<div class="ui middle aligned center aligned grid">
   			<div class="column-home">
-  				<ul style="text-align:right;">
-  					<a href="<?php echo base_url()?>index.php/C_admin"><i class="user icon"></i> Masuk Lab</a>
-  					<a href="<?php echo base_url()?>index.php/C_admin/history"><i class="history icon"></i> History</a>
-	                <a href="<?php echo base_url()?>index.php/C_auth/logout"><i class="sign out icon"></i> Logout</a>
-	            </ul>
   				<h2 class="ui inverted header">
   					<div class="content">SELAMAT DATANG DI LAB. </div>
   				</h2>
