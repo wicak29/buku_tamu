@@ -19,87 +19,97 @@
 	    <script src="<?php echo base_url('assets'); ?>/jquery-2.1.4.min.js"></script>
 		<script src="<?php echo base_url('assets'); ?>/semantic.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/components/style.css">
+		<link href="<?php echo base_url('assets'); ?>/components/hover.css" rel="stylesheet" media="all">
 		<script src="<?php echo base_url('assets'); ?>/sweetalert.min.js"></script> 
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/sweetalert.css">
 		<script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
 
+		<!-- SIDEBAR FUNCTION-->
+		<script type="text/javascript">
+  		$(function() 
+  		{
+    		$('#show-sidebar').click(function() 
+    		{
+    			$('#particles-js').show();
+    			$('.menu.sidebar').sidebar('setting', 'transition', 'overlay')
+      			$('.menu.sidebar').sidebar('toggle');
+    		});
+
+    		$('#hide-sidebar').click(function() 
+    		{
+    			$('#particles-js').show();
+      			$('#show-sidebar').show();
+      			$('.menu.sidebar').sidebar('setting', 'transition', 'overlay')
+      			$('.menu.sidebar').sidebar('toggle');
+    		});
+  		});
+		</script>
+		<!-- END SIDEBAR -->
 	</head>
   	<body>
-  		<!--MENU-->
-  		<div class="overlay fixed" style="position: fixed; top: 10px; left: 10; z-index: 1;">
-	      <div class="ui labeled blue icon vertical menu">
-	      	<a href="<?php echo base_url()?>index.php/C_admin" class="item">
+  		<!-- SIDEBAR -->
+  		<div class="ui left inverted vertical menu sidebar ">
+      		<div class="item">
+        		<div id="hide-sidebar" class="button">
+          			<i class="sidebar icon"></i> Menu Buku Tamu
+        		</div>
+      		</div>
+      		<a href="<?php echo base_url()?>index.php/C_admin" class="item active">
 	        	<i class="user icon"></i> Home Lab
 	        </a>
-	        <a href="<?php echo base_url()?>index.php/C_admin/history" class="item active">
+      		<a href="<?php echo base_url()?>index.php/C_admin/history" class="item">
 	        	<i class="history icon"></i> Riwayat
 	        </a>
 	        <a href="<?php echo base_url()?>index.php/C_auth/logout" class="item">
 	        	<i class="sign out icon"></i> Logout
 	        </a>
-	      </div>
-	    </div>
-  		<!--END MENU-->
+    	</div>
+    	<!-- SIDEBAR END-->
 
-  		<!-- <div class="ui left demo vertical inverted sidebar labeled icon menu">
-		  <a href="<?php echo base_url()?>index.php/C_admin" class="item">
-		    <i class="home icon"></i>
-		    Home
-		  </a>
-		  <a href="<?php echo base_url()?>index.php/C_admin/history" class="item active">
-		    <i class="history icon"></i>
-		    Riwayat
-		  </a>
-		  <a href="<?php echo base_url()?>index.php/C_auth/logout" class="item">
-		    <i class="sign out icon"></i>
-		    Logout
-		  </a>
-		</div> -->
+	  	<div class="dimmed pusher">
+	  		<div id="show-sidebar" class="ui button overlay fixed hvr-buzz" style="position: fixed; top: 10px; left: 10; z-index: 1; background-color : rgba(0,0,0,.0);">
+        		<i id="sidebar-btn" class="sidebar huge inverted icon"></i>
+      		</div>    
 
-  		<!-- <div id="show-sidebar" class="ui overlay fixed large" style="position: fixed; top: 10px; left: 10; z-index: 1;">
-  			<div class="ui inverted  blue large icon">
-  				<a href="" class="item">
-  					<i class="sidebar icon"></i>
-  				</a>
-  			</div>
-  		</div> -->
-	  	<div class="pusher">
 	  		<div id="particles-js"></div>
+
 	  		<div class="ui middle aligned center aligned grid">
 	  			<div class="double column-history">
 	  				<h2 class="ui inverted header">
 	  					<div class="content">PENGUNJUNG LAB. </div>
 	  				</h2>
-	  				<table class="ui celled padded table" id="example" cellspacing="0" width="100%">
-	  					<thead style="text-align:center;">
-	  						<tr>
-	  							<th>No</th>
-	  							<th>Pengunjung</th>
-	  							<th>Instansi</th>
-	  							<th>Tanggal</th>
-	  							<th>Waktu</th>
-	  							<th>Keperluan</th>
-	  						</tr>
-	  					</thead>
-	  					<tbody>
-	  					<?php 
-	  						$i=1;
-	  						foreach ($history as $r)
-	  						{
-	  							echo '<tr>';
-	  							echo '<td>'.$i.'</td>';
-	  							echo '<td>'. $r['nama_pengunjung'].'</td>';
-	  							echo '<td>'. $r['nama_instansi'].'</td>';
-	  							echo '<td>'. $r['tanggal'].'</td>';
-	  							echo '<td>'. $r['jam'].'</td>';
-	  							echo '<td>'. $r['keperluan'].'</td>';
-	  							echo '</tr>';
-	  							$i = $i + 1;
-	  						}
-	  					?>
-	  					</tbody>
-	  				</table>
+	  				<div class="ui large segment">
+	  					<table class="ui celled padded table" id="example" cellspacing="0" width="100%">
+		  					<thead style="text-align:center;">
+		  						<tr>
+		  							<th>No</th>
+		  							<th>Pengunjung</th>
+		  							<th>Instansi</th>
+		  							<th>Tanggal</th>
+		  							<th>Waktu</th>
+		  							<th>Keperluan</th>
+		  						</tr>
+		  					</thead>
+		  					<tbody>
+		  					<?php 
+		  						$i=1;
+		  						foreach ($history as $r)
+		  						{
+		  							echo '<tr>';
+		  							echo '<td>'.$i.'</td>';
+		  							echo '<td>'. $r['nama_pengunjung'].'</td>';
+		  							echo '<td>'. $r['nama_instansi'].'</td>';
+		  							echo '<td>'. $r['tanggal'].'</td>';
+		  							echo '<td>'. $r['jam'].'</td>';
+		  							echo '<td>'. $r['keperluan'].'</td>';
+		  							echo '</tr>';
+		  							$i = $i + 1;
+		  						}
+		  					?>
+		  					</tbody>
+		  				</table>
+	  				</div>
 	  			</div>
 	  		</div>
 	  	</div>
