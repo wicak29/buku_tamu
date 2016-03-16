@@ -50,16 +50,16 @@
   		<div class="ui left inverted vertical menu sidebar ">
       		<div class="item">
         		<div id="hide-sidebar" class="button">
-          			<i class="sidebar icon"></i>
+          			<i class="sidebar icon"></i>BUKU TAMU
         		</div>
       		</div>
-      		<a href="<?php echo base_url()?>index.php/C_admin" class="item active">
+      		<a href="<?php echo site_url('home')?>" class="item active">
 	        	<i class="user icon"></i> Home Lab
 	        </a>
-      		<a href="<?php echo base_url()?>index.php/C_admin/history" class="item">
+      		<a href="<?php echo site_url('home/history')?>" class="item">
 	        	<i class="history icon"></i> Riwayat
 	        </a>
-	        <a href="<?php echo base_url()?>index.php/C_auth/logout" class="item">
+	        <a href="<?php echo site_url('C_auth/logout')?>" class="item">
 	        	<i class="sign out icon"></i> Logout
 	        </a>
     	</div>
@@ -71,7 +71,7 @@
       		</div>    
 
   			<div id="particles-js"></div>
-  			
+
 			<div class="ui middle aligned center aligned grid">
 	  			<div class="column-home">
 	  				<h2 class="ui inverted header">

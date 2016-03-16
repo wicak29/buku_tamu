@@ -52,16 +52,16 @@
   		<div class="ui left inverted vertical menu sidebar ">
       		<div class="item">
         		<div id="hide-sidebar" class="button">
-          			<i class="sidebar icon"></i> Menu Buku Tamu
+          			<i class="sidebar icon"></i>BUKU TAMU
         		</div>
       		</div>
-      		<a href="<?php echo base_url()?>index.php/C_admin" class="item active">
+      		<a href="<?php echo site_url('home')?>" class="item">
 	        	<i class="user icon"></i> Home Lab
 	        </a>
-      		<a href="<?php echo base_url()?>index.php/C_admin/history" class="item">
+      		<a href="<?php echo site_url('home/history')?>" class="item active">
 	        	<i class="history icon"></i> Riwayat
 	        </a>
-	        <a href="<?php echo base_url()?>index.php/C_auth/logout" class="item">
+	        <a href="<?php echo site_url('C_auth/logout')?>" class="item">
 	        	<i class="sign out icon"></i> Logout
 	        </a>
     	</div>
@@ -79,7 +79,7 @@
 	  				<h2 class="ui inverted header">
 	  					<div class="content">PENGUNJUNG LAB. </div>
 	  				</h2>
-	  				<div class="ui large segment">
+	  				<div class="ui large segment" style="margin-bottom : 50px;">
 	  					<table class="ui celled padded table" id="example" cellspacing="0" width="100%">
 		  					<thead style="text-align:center;">
 		  						<tr>

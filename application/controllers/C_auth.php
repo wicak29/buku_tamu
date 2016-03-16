@@ -30,7 +30,7 @@ class C_auth extends CI_Controller {
 		$data['page_title'] = "Login";
 		if($this->session->has_userdata('username'))
 		{
-			redirect(site_url('C_admin'));
+			redirect(site_url('home'));
 		}
 		$this->load->view('admin/V_login', $data);
 	}
@@ -39,7 +39,7 @@ class C_auth extends CI_Controller {
 	{
 		if ($this->session->has_userdata('username')) 
 		{
-			redirect(site_url('C_admin'));
+			redirect(site_url('home'));
 		}
 		if ($_SERVER['REQUEST_METHOD']=='POST')
 		{
@@ -60,7 +60,7 @@ class C_auth extends CI_Controller {
 				$this->session->set_userdata($session_data);
 				if('username'=='SuperAdmin')
 					redirect(site_url('C_su_admin/'));
-				else redirect(site_url('C_admin/'));
+				else redirect(site_url('home/'));
 				//echo $this->session->has_userdata('username');
 			}	
 			else redirect(site_url('C_auth'));

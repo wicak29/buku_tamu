@@ -109,7 +109,7 @@ class C_pengunjungterdaftar extends CI_Controller {
 			$this->session->set_flashdata('notif', 1);
 			// echo "ganteng";
 		}
-		redirect(site_url('C_admin'));
+		redirect(site_url('home'));
 	}
 
 	public function add_instansi($data_instansi)
