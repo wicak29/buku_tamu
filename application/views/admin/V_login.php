@@ -17,6 +17,7 @@
 	    </title>
 
 	    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/semantic.min.css">
+	    <script src="<?php echo base_url('assets'); ?>/jquery-2.1.4.min.js"></script>
 		<script src="<?php echo base_url('assets'); ?>/semantic.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/components/style.css">
 	</head>
