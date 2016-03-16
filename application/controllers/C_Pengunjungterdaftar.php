@@ -104,7 +104,7 @@ class C_pengunjungterdaftar extends CI_Controller {
 		//cek apakah insert data berhasil
 		// print_r($insert1);
 		// print_r($insert2);
-		if ($insert1 && $insert2) 
+		if ($insert1 || $insert2) 
 		{
 			$this->session->set_flashdata('notif', 1);
 			// echo "ganteng";
