@@ -23,6 +23,8 @@
 		<script src="<?php echo base_url('assets'); ?>/sweetalert.min.js"></script> 
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/sweetalert.css">
 
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/jQuery-Autocomplete-master/content/styles.css">
+
 		<!-- SIDEBAR FUNCTION-->
 		<script type="text/javascript">
   		$(function() 
@@ -75,7 +77,7 @@
 			<div class="ui middle aligned center aligned grid">
 	  			<div class="column-home">
 	  				<h2 class="ui inverted header">
-	  					<div class="content">SELAMAT DATANG DI LAB. </div>
+	  					<div class="content">SELAMAT DATANG DI LAB. AJK</div>
 	  				</h2>
 	  				<form id="form_masuk"name="form-penggunjung" action="<?php echo site_url('C_Pengunjungterdaftar/add');?>" method='POST' class="ui large form segment error">
 	  					<div class="ui stacked">
@@ -136,7 +138,7 @@
 									</div>	
 						  		</div>	
 								<div class="ui input">
-									<input type="number" name="v_nrp" placeholder="eg : 5113100999">
+									<input type="number" name="v_nrp" placeholder="eg : 5113100999" id="autocomplete-ajax">
 								</div>
 							</div>
 							<div id="name" class="field">
@@ -193,7 +195,7 @@
 					  		</div> -->
 					    	<div class="ui description" style="text-align : center;">
 					    		<img src="<?php echo base_url('assets/images');?>/yes.gif" style="margin-bottom : 10px;"> 
-					      		<p>Sekarang kamu udah bisa nikmatin fasilitas Lab :)</p>
+					      		<p style="font-size:16pt;">Selamat menikmati fasilitas Lab :)</p>
 					    	</div>
 					  	</div>
 					  	<div id="oke" class="actions" style="text-align : center;">
@@ -228,6 +230,13 @@
 	<script src="<?php echo base_url('assets/particles');?>/particles.js"></script>
 	<script src="<?php echo base_url('assets/particles');?>/demo/js/app.js"></script>
 	<!--END PARTICLE-->
+
+	<!-- AUTO COMPLETE -->
+    <script type="text/javascript" src="<?php echo base_url('assets/jQuery-Autocomplete-master');?>/scripts/jquery.mockjax.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/jQuery-Autocomplete-master');?>/src/jquery.autocomplete.js"></script>
+    
+    <script type="text/javascript" src="<?php echo base_url('assets/jQuery-Autocomplete-master');?>/scripts/demo.js"></script>
+    <!-- END AUTO COMPLETE -->
 
   	<script>	
   		$("#nonits").hide();
@@ -488,5 +497,16 @@
   	// 			}
   	// 		}
   	// 	});
+		var countries = {
+			<?php 
+				$count = sizeof($pengunjung);
+				foreach ($pengunjung as $i => $idPengunjung) 
+				{
+					if ($count-1 == $i) echo '"'.$idPengunjung['idpengunjung'].'" : "'.$idPengunjung['nrp_pengunjung'].'"';
+					else echo '"'.$idPengunjung['idpengunjung'].'" : "'.$idPengunjung['nrp_pengunjung'].'",';
+				}
+			?>
+		}
   	</script>
+
 </html>

@@ -9,6 +9,8 @@ class C_admin extends CI_Controller {
 		$this->load->model('M_admin');
 		$this->load->model('M_instansi');
 		$this->load->model('M_pthaslab');
+		$this->load->model('M_pengunjungterdaftar');
+		// $this->session->set_flashdata('feedback', 'Feedback send successfully');
 		if(!$this->session->has_userdata('username'))
 		{
 			redirect(site_url('C_auth'));
@@ -19,6 +21,14 @@ class C_admin extends CI_Controller {
 	{
 		$data['page_title'] = "Home ";
 		$data['instansi'] = $this->M_instansi->get_instansi();
+		$data['pengunjung'] = $this->M_pengunjungterdaftar->getAllPengunjung();
+		// print_r(sizeof($data['pengunjung']));
+		// foreach ($data['pengunjung'] as $key => $value) 
+		// {
+		// 	print_r($key);
+		// 	print_r($value);
+		// }
+		// return;
 		$this->load->view('admin/V_home', $data);
 	}
 

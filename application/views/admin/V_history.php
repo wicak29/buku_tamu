@@ -77,7 +77,7 @@
 	  		<div class="ui middle aligned center aligned grid">
 	  			<div class="double column-history">
 	  				<h2 class="ui inverted header">
-	  					<div class="content">PENGUNJUNG LAB. </div>
+	  					<div class="content">PENGUNJUNG LAB. AJK</div>
 	  				</h2>
 	  				<div class="ui large segment" style="margin-bottom : 50px;">
 	  					<table class="ui celled padded table" id="example" cellspacing="0" width="100%">

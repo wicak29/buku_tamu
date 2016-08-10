@@ -116,8 +116,16 @@ class C_pengunjungterdaftar extends CI_Controller {
 	{
 		$this->M_instansi->add_instansi($data_instansi);
 	}
+
 	public function get_instansi()
 	{
 		$data['instansi'] = $this->M_instansi->get_instansi();
+	}
+
+	public function getAllPengunjung()
+	{
+		$result = $this->M_pengunjungterdaftar->getAllPengunjung();
+		print_r($result);
+		return;
 	}
 }
