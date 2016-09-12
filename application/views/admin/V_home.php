@@ -8,6 +8,7 @@
 	    <meta name="description" content="Developed By RnD Lab. @JK - Informatics ITS">
 	    <meta name="author" content="RnD @JK">
 	    <meta name="keywords" content="Buku Tamu, Ganteng, Keren, Aplikasi, Panutan">
+	    <link rel="shortcut icon" href="<?php echo base_url('assets'); ?>/images/favicon.ico">
 	    <title>
 	    	<?php
 	    		echo isset($page_title) ? $page_title.' | ':'';
@@ -22,8 +23,6 @@
 		<link href="<?php echo base_url('assets'); ?>/components/hover.css" rel="stylesheet" media="all">
 		<script src="<?php echo base_url('assets'); ?>/sweetalert.min.js"></script> 
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/sweetalert.css">
-
-		<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets'); ?>/jQuery-Autocomplete-master/content/styles.css">
 
 		<!-- SIDEBAR FUNCTION-->
 		<script type="text/javascript">
@@ -110,10 +109,10 @@
 							<!--END NON ITS-->
 							<div id="id" class="field">
 								<label>Nomor Identitas (NIP/NRP/NIM/KTP/SIM)</label>
-									<div class="five fields">
+								<div class="five fields">
 		    						<div class="field">	
 		    							<div class="ui radio checkbox">
-											<input type="radio" name="idPengenal" value="nrp" checked=""><label>NRP</label>
+											<input type="radio" name="idPengenal" value="nrp" checked="checked"><label>NRP</label>
 		    							</div>
 		    						</div>
 									<div class="field">
@@ -138,31 +137,31 @@
 									</div>	
 						  		</div>	
 								<div class="ui input">
-									<input type="number" name="v_nrp" placeholder="eg : 5113100999" id="autocomplete-ajax">
+									<input type="text" name="v_nrp" placeholder="eg : 5113100999" id="autocomplete-ajax">
 								</div>
 							</div>
 							<div id="name" class="field">
 								<label>Nama Lengkap</label>
 								<div class="ui input">
-									<input type="text" name="v_nama" placeholder="eg : Lionel Messi">
+									<input type="text" name="v_nama" placeholder="eg : Lionel Messi" id="nama">
 								</div>
 							</div>
-							<div id="ttl" class="field">
+							<div class="field">
 								<label>Tahun Lahir</label>
 								<div class="ui input">
-									<input type="text" name="v_tahun" placeholder="eg : 1995">
+									<input type="text" name="v_tahun" placeholder="eg : 1995" id="ttl">
 								</div>
 							</div>
-							<div id="kota" class="field">
+							<div class="field">
 								<label>Kota Asal</label>
 								<div class="ui input">
-									<input type="text" name="v_kota" placeholder="eg : Surabaya">
+									<input type="text" name="v_kota" placeholder="eg : Surabaya" id="kota">
 								</div>
 							</div>
-							<div id="hp" class="field">
+							<div class="field">
 								<label>Nomor HP</label>
 								<div class="ui input">
-									<input type="text" name="v_telp" placeholder="eg : 081234567890">
+									<input type="text" name="v_telp" placeholder="eg : 081234567890" id="hp">
 								</div>
 							</div>
 							<div id="keperluan" class="field">
@@ -189,7 +188,7 @@
 
 					<div id="berhasil" class="ui basic small modal">
 					  	<div class="ui content" style="text-align : center; ">
-					  		<h2>YAY!</h2>
+					  		<h2>TERIMA KASIH!</h2>
 					  		<!-- <div class="ui image">
 					  			<img src="<?php echo base_url('assets/images');?>/yes.gif"> 
 					  		</div> -->
@@ -232,10 +231,8 @@
 	<!--END PARTICLE-->
 
 	<!-- AUTO COMPLETE -->
-    <script type="text/javascript" src="<?php echo base_url('assets/jQuery-Autocomplete-master');?>/scripts/jquery.mockjax.js"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/jQuery-Autocomplete-master');?>/src/jquery.autocomplete.js"></script>
-    
-    <script type="text/javascript" src="<?php echo base_url('assets/jQuery-Autocomplete-master');?>/scripts/demo.js"></script>
+
+
     <!-- END AUTO COMPLETE -->
 
   	<script>	
@@ -508,5 +505,45 @@
 			?>
 		}
   	</script>
+
+  	<script>
+	document.getElementById("autocomplete-ajax").onkeyup = function() {completeAll()};
+
+	function completeAll() 
+    {
+    	var nrp = document.getElementById("autocomplete-ajax").value;
+    	nrp_length = nrp.length;
+    	if (nrp_length==10) 
+    	{
+    		var request = $.ajax(
+	        {
+	          url: "<?php echo site_url('C_Pengunjungterdaftar/getPengunjungByNrp/');?>/"+nrp,
+	          method: "GET"
+	        });
+	         
+	        request.done(function(detail) 
+	        {
+	        	// console.log(detail.nama_pengunjung);
+	        	if (detail!=null)
+	        	{
+	        		$("#nama").val(detail.nama_pengunjung)
+	        		$("#ttl").val(detail.tahun_lahir)
+	        		$("#kota").val(detail.kota_asal)
+	        		$("#hp").val(detail.telp_pengunjung)
+	        	}
+
+	        	console.log(detail);
+	        	// console.log(detail);
+	        	// console.log(dataUser);
+	        });
+	         
+	        request.fail(function( jqXHR, textStatus ) 
+	        {
+	          alert( "Request failed: " + textStatus );
+	        });
+    	}
+    }
+
+	</script>
 
 </html>

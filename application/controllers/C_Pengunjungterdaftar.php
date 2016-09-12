@@ -128,4 +128,11 @@ class C_pengunjungterdaftar extends CI_Controller {
 		print_r($result);
 		return;
 	}
+
+	public function getPengunjungByNrp($nrp)
+	{
+		$result = $this->M_pengunjungterdaftar->get_by_nrp($nrp);
+		header('Content-Type: application/json');
+   		echo json_encode($result);
+	}
 }
