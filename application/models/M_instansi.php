@@ -2,10 +2,16 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class M_instansi extends CI_Model {
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->database();
+	}
+
 	
 	function add_instansi($data)
 	{
-		$this->db->insert('instansi',$data);
+		$query = $this->db->insert('instansi',$data);
 	}
 
 	function get_instansi_byname($instansi)

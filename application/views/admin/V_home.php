@@ -523,7 +523,7 @@
 	         
 	        request.done(function(detail) 
 	        {
-	        	// console.log(detail.nama_pengunjung);
+	        	// console.log(detail);
 	        	if (detail!=null)
 	        	{
 	        		$("#nama").val(detail.nama_pengunjung)
